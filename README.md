@@ -10,7 +10,7 @@ yarn add -D prettier eslint
 yarn add -D eslint-config-prettier eslint-plugin-react eslint-config-airbnb eslint-plugin-prettier eslint-plugin-react-hooks eslint-plugin-jsx-a11y eslint-plugin-import
 touch .eslintrc.json
 
-```json
+```javascript
 {
   "parser": "@babel/eslint-parser",
   "parserOptions": {
