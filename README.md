@@ -10,7 +10,7 @@ yarn add -D prettier eslint
 yarn add -D eslint-config-prettier eslint-plugin-react eslint-config-airbnb eslint-plugin-prettier eslint-plugin-react-hooks eslint-plugin-jsx-a11y eslint-plugin-import
 touch .eslintrc.json
 
-```
+```json
 {
   "parser": "@babel/eslint-parser",
   "parserOptions": {
@@ -92,7 +92,7 @@ yarn add -D webpack webpack-cli html-webpack-plugin terser-webpack-plugin babel-
 
 touch babel.config.json
 
-```
+```json
 {
   "presets": ["@babel/preset-env", "@babel/preset-react"]
 }
@@ -100,7 +100,7 @@ touch babel.config.json
 
 touch webpack.config.js
 
-```
+```javascript
 const reactConfig = require("./webpack.react.js");
 
 module.exports = [reactConfig];
@@ -108,7 +108,7 @@ module.exports = [reactConfig];
 
 touch webpack.react.js
 
-```
+```javascript
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
