@@ -2,13 +2,13 @@
 
 ## create project
 
-1. npm init
+npm init
 
 ## code styling/hygienic setup
 
-1. yarn add -D prettier eslint
-1. yarn add -D eslint-config-prettier eslint-plugin-react eslint-config-airbnb eslint-plugin-prettier eslint-plugin-react-hooks eslint-plugin-jsx-a11y eslint-plugin-import
-1. touch .eslintrc.json
+yarn add -D prettier eslint
+yarn add -D eslint-config-prettier eslint-plugin-react eslint-config-airbnb eslint-plugin-prettier eslint-plugin-react-hooks eslint-plugin-jsx-a11y eslint-plugin-import
+touch .eslintrc.json
 
 ```
 {
@@ -42,7 +42,7 @@
 }
 ```
 
-1. touch .prettierrc.json
+touch .prettierrc.json
 
 ```
 {
@@ -55,9 +55,9 @@
 
 ## write React code
 
-1. yarn add react react-dom
-1. mkdir public
-1. touch public/index.html
+yarn add react react-dom
+mkdir public
+touch public/index.html
 
 ```
 <!DOCTYPE html>
@@ -72,9 +72,9 @@
 </html>
 ```
 
-1. mkdir src
-1. touch src/index.js src/Layout.js src/Router.js src/Route1.js src/Route2.js
-1. update src/index.js
+mkdir src
+touch src/index.js src/Layout.js src/Router.js src/Route1.js src/Route2.js
+update src/index.js
 
 ```javascript
 import React from "react";
@@ -85,12 +85,12 @@ ReactDom.render(<div>Hello World</div>, document.getElementById("root"));
 
 ## add babel and webpack
 
-1. yarn add -D @babel/core @babel/eslint-parser @babel/preset-env @babel/preset-react
-1. yarn add -D webpack webpack-cli html-webpack-plugin terser-webpack-plugin babel-loader
+yarn add -D @babel/core @babel/eslint-parser @babel/preset-env @babel/preset-react
+yarn add -D webpack webpack-cli html-webpack-plugin terser-webpack-plugin babel-loader
 
-## compiling React code using webpack and babel
+## transpile React code using webpack and babel
 
-1. touch babel.config.json
+touch babel.config.json
 
 ```
 {
@@ -98,7 +98,7 @@ ReactDom.render(<div>Hello World</div>, document.getElementById("root"));
 }
 ```
 
-1. touch webpack.config.js
+touch webpack.config.js
 
 ```
 const reactConfig = require("./webpack.react.js");
@@ -106,7 +106,7 @@ const reactConfig = require("./webpack.react.js");
 module.exports = [reactConfig];
 ```
 
-1. touch webpack.react.js
+touch webpack.react.js
 
 ```
 const path = require("path");
@@ -150,4 +150,16 @@ const reactConfig = {
 };
 
 module.exports = reactConfig;
+```
+
+## run React locally
+
+yarn add -D webpack-dev-server
+add script to package.json
+
+```
+  "scripts": {
+    "webpack": "webpack",
+    "webpack-dev": "webpack serve"
+  },
 ```
