@@ -10,7 +10,7 @@ yarn add -D prettier eslint
 yarn add -D eslint-config-prettier eslint-plugin-react eslint-config-airbnb eslint-plugin-prettier eslint-plugin-react-hooks eslint-plugin-jsx-a11y eslint-plugin-import
 touch .eslintrc.json
 
-```javascript
+```json
 {
   "parser": "@babel/eslint-parser",
   "parserOptions": {
@@ -44,7 +44,7 @@ touch .eslintrc.json
 
 touch .prettierrc.json
 
-```
+```json
 {
   "semi": true,
   "trailingComma": "es5"
@@ -59,7 +59,7 @@ yarn add react react-dom
 mkdir public
 touch public/index.html
 
-```
+```html
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -157,7 +157,7 @@ module.exports = reactConfig;
 yarn add -D webpack-dev-server
 add script to package.json
 
-```
+```json
   "scripts": {
     "webpack": "webpack",
     "webpack-dev": "webpack serve"
