@@ -163,3 +163,29 @@ add script to package.json
     "webpack-dev": "webpack serve"
   },
 ```
+
+## write node.js and transpile using webpack
+
+mkdir src/serverside
+touch src/serverside/index.js
+yarn add express nodemon
+yarn add regenerator-runtime
+
+```javascript
+import "regenerator-runtime/runtime";
+import express from "express";
+
+const app = express();
+
+app.get("/", "");
+
+app.listen(3000, () => {
+  console.log(`Server is listening on port 3000`);
+});
+```
+
+touch webpack.serverside.js
+
+```javascript
+
+```
