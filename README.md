@@ -177,15 +177,169 @@ import express from "express";
 
 const app = express();
 
-app.get("/", "");
+app.get("/", (req, res) => {
+  console.log("received request!");
+  res.send("Hello");
+});
 
 app.listen(3000, () => {
   console.log(`Server is listening on port 3000`);
 });
 ```
 
+yarn add -D webpack-node-externals
 touch webpack.serverside.js
 
 ```javascript
+const path = require("path");
+const webpack = require("webpack");
+const nodeExternals = require("webpack-node-externals");
+const TerserPlugin = require("terser-webpack-plugin");
 
+const isDevelopment = process.env.NODE_ENV === "development";
+
+const serversideConfig = {
+  mode: "production",
+  entry: "./src/serverside/index.js",
+  target: "node",
+  output: {
+    path: path.resolve(__dirname, "build"),
+    filename: "serverside.js",
+  },
+  externals: nodeExternals(),
+  optimization: {
+    splitChunks: false,
+    minimize: true,
+    minimizer: [
+      new TerserPlugin({ parallel: true, terserOptions: { ecma: 6 } }),
+    ],
+  },
+  resolve: {
+    modules: ["node_modules", path.resolve(__dirname, "src")],
+  },
+  module: {
+    rules: [
+      {
+        test: /\.(js)$/,
+        include: path.resolve(__dirname, "src"),
+        use: "babel-loader",
+      },
+      {
+        test: /\.(png|svg|jpg|gif)$/,
+        use: ["file-loader"],
+      },
+      {
+        test: /\.(woff|woff2|eot|ttf|otf)$/,
+        use: ["file-loader"],
+      },
+    ],
+  },
+};
+
+module.exports = serversideConfig;
+```
+
+update webpack.config.js
+
+```javascript
+const reactConfig = require("./webpack.react.js");
+const serversideConfig = require("./webpack.serverside.js");
+
+module.exports = [reactConfig, serversideConfig];
+```
+
+## Serve React app from Node.js
+
+touch src/App.js
+
+```javascript
+import React from "react";
+
+export default function App() {
+  return <div>Hello world</div>;
+}
+```
+
+update src/index.js
+
+```javascript
+import React from "react";
+import ReactDom from "react-dom";
+import App from "./App";
+
+ReactDom.render(<App />, document.getElementById("root"));
+```
+
+update src/serverside/index.js
+
+```javascript
+import "regenerator-runtime/runtime";
+import express from "express";
+import handleRequestPage from "./handleRequestPage";
+
+const app = express();
+
+app.get("/", handleRequestPage);
+app.get("/index.html", (req, res) => res.redirect("/"));
+
+app.use(express.static("./build"));
+
+app.get("*", handleRequestPage);
+
+app.listen(3000, () => {
+  console.log(`Server is listening on port 3000`);
+});
+```
+
+yarn add Promise
+touch src/serverside/handleRequestPage.js
+
+```javascript
+import React from "react";
+import ReactDOMServer from "react-dom/server";
+import fs from "fs";
+import Promise from "promise";
+
+import App from "App";
+
+const file = fs.readFileSync("./build/index.html", "utf8");
+
+function renderToStream() {
+  const bodyStream = ReactDOMServer.renderToNodeStream(<App />);
+
+  return {
+    bodyStream,
+  };
+}
+
+function handleRequestPage(req, res) {
+  return new Promise((resolve) => {
+    const body = [];
+    const { bodyStream } = renderToStream();
+
+    bodyStream.on("data", (chunk) => {
+      body.push(chunk.toString());
+    });
+
+    bodyStream.on("error", (err) => {
+      // eslint-disable-next-line
+      console.log(err);
+
+      res.status(500).send("Something went wrong. Please try again.");
+      resolve();
+    });
+
+    bodyStream.on("end", () => {
+      const html = file.replace(
+        `<div id="root"></div>`,
+        `<div id="root">${body.join("")}</div>`
+      );
+
+      res.send(html);
+      resolve();
+    });
+  });
+}
+
+export default handleRequestPage;
 ```

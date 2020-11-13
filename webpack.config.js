@@ -1,3 +1,4 @@
 const reactConfig = require("./webpack.react.js");
+const serversideConfig = require("./webpack.serverside.js");
 
-module.exports = [reactConfig];
+module.exports = [reactConfig, serversideConfig];
