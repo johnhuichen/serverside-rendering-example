@@ -31,14 +31,6 @@ const serversideConfig = {
         include: path.resolve(__dirname, "src"),
         use: "babel-loader",
       },
-      {
-        test: /\.(png|svg|jpg|gif)$/,
-        use: ["file-loader"],
-      },
-      {
-        test: /\.(woff|woff2|eot|ttf|otf)$/,
-        use: ["file-loader"],
-      },
     ],
   },
 };

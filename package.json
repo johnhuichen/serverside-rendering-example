@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "webpack": "webpack",
-    "webpack-dev": "webpack serve"
+    "webpack-dev": "webpack serve --config webpack.react.js",
+    "webpack-watch": "webpack -w",
+    "start-dev": "nodemon build/serverside.js"
   },
   "author": "",
   "license": "ISC",
@@ -36,6 +38,7 @@
     "promise": "^8.1.0",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
+    "react-router-dom": "^5.2.0",
     "regenerator-runtime": "^0.13.7",
     "webpack-dev-server": "^3.11.0"
   }

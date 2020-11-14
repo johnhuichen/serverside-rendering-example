@@ -73,8 +73,7 @@ touch public/index.html
 ```
 
 mkdir src
-touch src/index.js src/Layout.js src/Router.js src/Route1.js src/Route2.js
-update src/index.js
+touch src/index.js
 
 ```javascript
 import React from "react";
@@ -224,14 +223,6 @@ const serversideConfig = {
         include: path.resolve(__dirname, "src"),
         use: "babel-loader",
       },
-      {
-        test: /\.(png|svg|jpg|gif)$/,
-        use: ["file-loader"],
-      },
-      {
-        test: /\.(woff|woff2|eot|ttf|otf)$/,
-        use: ["file-loader"],
-      },
     ],
   },
 };
@@ -342,4 +333,124 @@ function handleRequestPage(req, res) {
 }
 
 export default handleRequestPage;
+```
+
+## Setup webpack watcher and nodemon for local development
+
+add a script in package.json
+
+```javascript
+  ...
+  "scripts": {
+    "webpack": "webpack",
+    "webpack-dev": "webpack serve",
+    "webpack-watch": "webpack watch"
+  },
+  ...
+```
+
+yarn add nodemon
+
+add a script in package.json
+
+```
+  ...
+  "scripts": {
+    "webpack": "webpack",
+    "webpack-dev": "webpack serve",
+    "webpack-watch": "webpack -w",
+    "start-dev": "nodemon build/serverside.js"
+  },
+  ...
+```
+
+## Test if React features work
+
+update src/App.js
+
+```javascript
+import React from "react";
+
+export default function App() {
+  const [showText, setShowText] = React.useState(false);
+  const handleToggle = React.useCallback(() => {
+    setShowText(!showText);
+  }, [showText]);
+
+  return (
+    <>
+      <button onClick={handleToggle} type="button">
+        Click Me
+      </button>
+      {showText && <div>Now you see me</div>}
+    </>
+  );
+}
+```
+
+update src/index.js
+
+```
+import React from "react";
+import ReactDom from "react-dom";
+import App from "./App";
+
+ReactDom.hydrate(<App />, document.getElementById("root"));
+```
+
+## Test if React router works
+
+yarn add react-router-dom
+touch src/Route1.js src/Route2.js
+
+update src/App.js
+
+```javascript
+import React from "react";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
+import Route1 from "./Route1";
+import Route2 from "./Route2";
+
+export default function Router() {
+  return (
+    <BrowserRouter>
+      <Switch>
+        <Route path="/" exact component={Route1} />
+        <Route path="/foo" exact component={Route2} />
+      </Switch>
+    </BrowserRouter>
+  );
+}
+```
+
+update src/Route1.js
+
+```javascript
+import React from "react";
+
+export default function Route1() {
+  const [showText, setShowText] = React.useState(false);
+  const handleToggle = React.useCallback(() => {
+    setShowText(!showText);
+  }, [showText]);
+
+  return (
+    <>
+      <button onClick={handleToggle} type="button">
+        Click Me
+      </button>
+      {showText && <div>Now you see me</div>}
+    </>
+  );
+}
+```
+
+update src/Route2.js
+
+```javascript
+import React from "react";
+
+export default function Route2() {
+  return <div>This is the second page</div>;
+}
 ```
