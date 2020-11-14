@@ -427,21 +427,10 @@ update src/Route1.js
 
 ```javascript
 import React from "react";
+import { Link } from "react-router-dom";
 
 export default function Route1() {
-  const [showText, setShowText] = React.useState(false);
-  const handleToggle = React.useCallback(() => {
-    setShowText(!showText);
-  }, [showText]);
-
-  return (
-    <>
-      <button onClick={handleToggle} type="button">
-        Click Me
-      </button>
-      {showText && <div>Now you see me</div>}
-    </>
-  );
+  return <Link to="/foo">Go to Foo</Link>;
 }
 ```
 
@@ -453,4 +442,117 @@ import React from "react";
 export default function Route2() {
   return <div>This is the second page</div>;
 }
+```
+
+to try it with webpack dev server
+update src/index.js, change `hydrate` to `render`
+
+add one more option to webpack.react.js
+{
+...
+devServer: {
+historyApiFallback: true,
+},
+...
+}
+
+now try it by serving it from node.js
+update src/index.js
+
+```
+import React from "react";
+import { BrowserRouter } from "react-router-dom";
+import ReactDom from "react-dom";
+import App from "./App";
+
+ReactDom.hydrate(
+  <BrowserRouter>
+    <App />
+  </BrowserRouter>,
+  document.getElementById("root")
+);
+```
+
+update src/Router.js
+
+```javascript
+import React from "react";
+import { Route, Switch } from "react-router-dom";
+import Route1 from "./Route1";
+import Route2 from "./Route2";
+
+export default function Router() {
+  return (
+    <>
+      <Switch>
+        <Route path="/" exact component={Route1} />
+        <Route path="/foo" component={Route2} />
+      </Switch>
+    </>
+  );
+}
+```
+
+update src/serverside/handleRequestPage.js
+
+```javascript
+import React from "react";
+import ReactDOMServer from "react-dom/server";
+import { StaticRouter } from "react-router-dom";
+import fs from "fs";
+import Promise from "promise";
+
+import App from "App";
+
+const file = fs.readFileSync("./build/index.html", "utf8");
+
+function renderToStream(req) {
+  const context = {};
+  const bodyStream = ReactDOMServer.renderToNodeStream(
+    <StaticRouter location={req.url} context={context}>
+      <App />
+    </StaticRouter>
+  );
+
+  return {
+    bodyStream,
+    context,
+  };
+}
+
+function handleRequestPage(req, res) {
+  return new Promise((resolve) => {
+    const body = [];
+    const { bodyStream, context } = renderToStream(req);
+
+    if (context.url) {
+      res.redirect(context.url);
+      resolve();
+    }
+
+    bodyStream.on("data", (chunk) => {
+      body.push(chunk.toString());
+    });
+
+    bodyStream.on("error", (err) => {
+      // eslint-disable-next-line
+      console.log(err);
+
+      res.status(500).send("Something went wrong. Please try again.");
+      resolve();
+    });
+
+    bodyStream.on("end", () => {
+      const html = file.replace(
+        `<div id="root"></div>`,
+        `<div id="root">${body.join("")}</div>`
+      );
+
+      res.send(html);
+      resolve();
+    });
+  });
+}
+
+export default handleRequestPage;
 ```

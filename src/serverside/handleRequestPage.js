@@ -1,5 +1,6 @@
 import React from "react";
 import ReactDOMServer from "react-dom/server";
+import { StaticRouter } from "react-router-dom";
 import fs from "fs";
 import Promise from "promise";
 
@@ -7,18 +8,29 @@ import App from "App";
 
 const file = fs.readFileSync("./build/index.html", "utf8");
 
-function renderToStream() {
-  const bodyStream = ReactDOMServer.renderToNodeStream(<App />);
+function renderToStream(req) {
+  const context = {};
+  const bodyStream = ReactDOMServer.renderToNodeStream(
+    <StaticRouter location={req.url} context={context}>
+      <App />
+    </StaticRouter>
+  );
 
   return {
     bodyStream,
+    context,
   };
 }
 
 function handleRequestPage(req, res) {
   return new Promise((resolve) => {
     const body = [];
-    const { bodyStream } = renderToStream();
+    const { bodyStream, context } = renderToStream(req);
+
+    if (context.url) {
+      res.redirect(context.url);
+      resolve();
+    }
 
     bodyStream.on("data", (chunk) => {
       body.push(chunk.toString());

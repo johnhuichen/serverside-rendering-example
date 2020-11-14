@@ -36,6 +36,9 @@ const reactConfig = {
       },
     ],
   },
+  devServer: {
+    historyApiFallback: true,
+  },
 };
 
 module.exports = reactConfig;

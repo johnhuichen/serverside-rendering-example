@@ -1,5 +1,6 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 export default function Route2() {
-  return <div>This is the second page</div>;
+  return <Link to="/">Go to Home Page</Link>;
 }
