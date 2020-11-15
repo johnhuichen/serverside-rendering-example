@@ -395,7 +395,8 @@ import React from "react";
 import ReactDom from "react-dom";
 import App from "./App";
 
-ReactDom.hydrate(<App />, document.getElementById("root"));
+- ReactDom.hydrate(<App />, document.getElementById("root"));
++ ReactDom.hydrate(<App />, document.getElementById("root"));
 ```
 
 ## Test if React router works
@@ -406,21 +407,35 @@ touch src/Route1.js src/Route2.js
 
 update src/App.js
 
-```javascript
+```diff
 import React from 'react';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import Route1 from './Route1';
-import Route2 from './Route2';
++ import { BrowserRouter, Route, Switch } from 'react-router-dom';
++ import Route1 from './Route1';
++ import Route2 from './Route2';
 
 export default function Router() {
-  return (
-    <BrowserRouter>
-      <Switch>
-        <Route path="/" exact component={Route1} />
-        <Route path="/foo" exact component={Route2} />
-      </Switch>
-    </BrowserRouter>
-  );
+-  const [showText, setShowText] = React.useState(false);
+-  const handleToggle = React.useCallback(() => {
+-    setShowText(!showText);
+-  }, [showText]);
+-
+-  return (
+-    <>
+-      <button onClick={handleToggle} type="button">
+-        Click Me
+-      </button>
+-      {showText && <div>Now you see me</div>}
+-    </>
+-  );
+
++  return (
++    <BrowserRouter>
++      <Switch>
++        <Route path="/" exact component={Route1} />
++        <Route path="/foo" exact component={Route2} />
++      </Switch>
++    </BrowserRouter>
++  );
 }
 ```
 
