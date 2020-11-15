@@ -159,7 +159,10 @@ yarn add -D webpack-dev-server
 
 add script to package.json
 
-```json
+```diff
+  - "scripts": {
+  -  "test": "echo \"Error: no test specified\" && exit 1"
+  - },
   + "scripts": {
   +  "webpack": "webpack",
   +  "webpack-dev": "webpack serve"
