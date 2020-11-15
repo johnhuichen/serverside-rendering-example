@@ -273,16 +273,21 @@ update src/serverside/index.js
 ```javascript
 import 'regenerator-runtime/runtime';
 import express from 'express';
-import handleRequestPage from './handleRequestPage';
++ import handleRequestPage from './handleRequestPage';
 
 const app = express();
 
-app.get('/', handleRequestPage);
-app.get('/index.html', (req, res) => res.redirect('/'));
+- app.get('/', (req, res) => {
+-  console.log('received request!');
+-  res.send('Hello World from node.js');
+- });
 
-app.use(express.static('./build'));
++ app.get('/', handleRequestPage);
++ app.get('/index.html', (req, res) => res.redirect('/'));
 
-app.get('*', handleRequestPage);
++ app.use(express.static('./build'));
+
++ app.get('*', handleRequestPage);
 
 app.listen(8080, () => {
   console.log(`Server is listening on port 8080`);
