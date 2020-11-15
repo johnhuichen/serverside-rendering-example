@@ -160,10 +160,10 @@ yarn add -D webpack-dev-server
 add script to package.json
 
 ```json
-  "scripts": {
-    "webpack": "webpack",
-    "webpack-dev": "webpack serve"
-  },
+  + "scripts": {
+  +  "webpack": "webpack",
+  +  "webpack-dev": "webpack serve"
+  + },
 ```
 
 ## write node.js and transpile using webpack
