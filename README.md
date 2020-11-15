@@ -366,23 +366,25 @@ add scripts in package.json
 
 update src/App.js
 
-```javascript
+```diff
 import React from 'react';
 
 export default function App() {
-  const [showText, setShowText] = React.useState(false);
-  const handleToggle = React.useCallback(() => {
-    setShowText(!showText);
-  }, [showText]);
+-  return <div>Hello world in App</div>;
 
-  return (
-    <>
-      <button onClick={handleToggle} type="button">
-        Click Me
-      </button>
-      {showText && <div>Now you see me</div>}
-    </>
-  );
++  const [showText, setShowText] = React.useState(false);
++  const handleToggle = React.useCallback(() => {
++    setShowText(!showText);
++  }, [showText]);
++
++  return (
++    <>
++      <button onClick={handleToggle} type="button">
++        Click Me
++      </button>
++      {showText && <div>Now you see me</div>}
++    </>
++  );
 }
 ```
 
