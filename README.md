@@ -542,10 +542,10 @@ export default function Router() {
 
 update src/serverside/handleRequestPage.js
 
-```javascript
+```diff
 import React from "react";
 import ReactDOMServer from "react-dom/server";
-import { StaticRouter } from "react-router-dom";
++ import { StaticRouter } from "react-router-dom";
 import fs from "fs";
 import Promise from "promise";
 
@@ -553,29 +553,30 @@ import App from "App";
 
 const file = fs.readFileSync("./build/index.html", "utf8");
 
-function renderToStream(req) {
-  const context = {};
-  const bodyStream = ReactDOMServer.renderToNodeStream(
-    <StaticRouter location={req.url} context={context}>
-      <App />
-    </StaticRouter>
-  );
++ function renderToStream(req) {
++  const context = {};
++  const bodyStream = ReactDOMServer.renderToNodeStream(
++    <StaticRouter location={req.url} context={context}>
++      <App />
++    </StaticRouter>
++  );
 
   return {
     bodyStream,
-    context,
++    context,
   };
 }
 
 function handleRequestPage(req, res) {
   return new Promise((resolve) => {
     const body = [];
-    const { bodyStream, context } = renderToStream(req);
+-    const { bodyStream } = renderToStream();
++    const { bodyStream, context } = renderToStream(req);
 
-    if (context.url) {
-      res.redirect(context.url);
-      resolve();
-    }
++    if (context.url) {
++      res.redirect(context.url);
++      resolve();
++    }
 
     bodyStream.on("data", (chunk) => {
       body.push(chunk.toString());
