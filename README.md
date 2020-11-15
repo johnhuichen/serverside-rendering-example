@@ -6,10 +6,12 @@ npm init
 
 ## code styling/hygienic setup
 
-1. yarn add -D prettier eslint
-1. yarn add -D eslint-config-prettier eslint-plugin-react eslint-config-airbnb eslint-plugin-prettier eslint-plugin-react-hooks eslint-plugin-jsx-a11y eslint-plugin-import
+yarn add -D prettier eslint
+
+yarn add -D eslint-config-prettier eslint-plugin-react eslint-config-airbnb eslint-plugin-prettier eslint-plugin-react-hooks eslint-plugin-jsx-a11y eslint-plugin-import
+
 <details>
-  <summary>1. touch .eslintrc.json</summary>
+  <summary>touch .eslintrc.json</summary>
 
   ```javascript
   {
