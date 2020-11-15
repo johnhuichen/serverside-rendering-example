@@ -75,6 +75,7 @@ touch public/index.html
 ```
 
 mkdir src
+
 touch src/index.js
 
 ```javascript
@@ -87,6 +88,7 @@ ReactDom.render(<div>Hello World</div>, document.getElementById('root'));
 ## add babel and webpack
 
 yarn add -D @babel/core @babel/eslint-parser @babel/preset-env @babel/preset-react
+
 yarn add -D webpack webpack-cli html-webpack-plugin terser-webpack-plugin babel-loader
 
 ## transpile React code using webpack and babel
@@ -154,6 +156,7 @@ module.exports = reactConfig;
 ## run React locally
 
 yarn add -D webpack-dev-server
+
 add script to package.json
 
 ```json
@@ -166,8 +169,11 @@ add script to package.json
 ## write node.js and transpile using webpack
 
 mkdir src/serverside
+
 touch src/serverside/index.js
+
 yarn add express nodemon
+
 yarn add regenerator-runtime
 
 ```javascript
@@ -187,6 +193,7 @@ app.listen(3000, () => {
 ```
 
 yarn add -D webpack-node-externals
+
 touch webpack.serverside.js
 
 ```javascript
@@ -281,6 +288,7 @@ app.listen(3000, () => {
 ```
 
 yarn add Promise
+
 touch src/serverside/handleRequestPage.js
 
 ```javascript
@@ -396,6 +404,7 @@ ReactDom.hydrate(<App />, document.getElementById("root"));
 ## Test if React router works
 
 yarn add react-router-dom
+
 touch src/Route1.js src/Route2.js
 
 update src/App.js
@@ -451,7 +460,8 @@ historyApiFallback: true,
 ...
 }
 
-now try it by serving it from node.js
+## serving frontend from node.js
+
 update src/index.js
 
 ```
