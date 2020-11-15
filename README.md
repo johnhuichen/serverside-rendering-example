@@ -347,29 +347,17 @@ export default handleRequestPage;
 
 ## Setup webpack watcher and nodemon for local development
 
-add a script in package.json
+yarn add nodemon
+
+add scripts in package.json
 
 ```diff
   ...
   "scripts": {
     "webpack": "webpack",
     "webpack-dev": "webpack serve",
-    + "webpack-watch": "webpack watch"
-  },
-  ...
-```
-
-yarn add nodemon
-
-add a script in package.json
-
-```
-  ...
-  "scripts": {
-    "webpack": "webpack",
-    "webpack-dev": "webpack serve",
-    "webpack-watch": "webpack -w",
-    "start-dev": "nodemon build/serverside.js"
+    + "webpack-watch": "webpack -w",
+    + "start-dev": "nodemon build/serverside.js"
   },
   ...
 ```
