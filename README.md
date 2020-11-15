@@ -298,7 +298,7 @@ yarn add Promise
 
 touch src/serverside/handleRequestPage.js
 
-```javascript
+```diff
 import React from 'react';
 import ReactDOMServer from 'react-dom/server';
 import fs from 'fs';
