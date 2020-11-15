@@ -553,8 +553,10 @@ import App from "App";
 
 const file = fs.readFileSync("./build/index.html", "utf8");
 
+- function renderToStream() {
 + function renderToStream(req) {
 +  const context = {};
+-  const bodyStream = ReactDOMServer.renderToNodeStream(<App />);
 +  const bodyStream = ReactDOMServer.renderToNodeStream(
 +    <StaticRouter location={req.url} context={context}>
 +      <App />
