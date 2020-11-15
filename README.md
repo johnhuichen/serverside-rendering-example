@@ -188,8 +188,8 @@ app.get('/', (req, res) => {
   res.send('Hello');
 });
 
-app.listen(3000, () => {
-  console.log(`Server is listening on port 3000`);
+app.listen(8080, () => {
+  console.log(`Server is listening on port 8080`);
 });
 ```
 
@@ -283,8 +283,8 @@ app.use(express.static('./build'));
 
 app.get('*', handleRequestPage);
 
-app.listen(3000, () => {
-  console.log(`Server is listening on port 3000`);
+app.listen(8080, () => {
+  console.log(`Server is listening on port 8080`);
 });
 ```
 
