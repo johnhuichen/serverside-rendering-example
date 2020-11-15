@@ -171,11 +171,11 @@ add script to package.json
 
 ## write node.js and transpile using webpack
 
+yarn add express regenerator-runtime
+
 mkdir src/serverside
 
 touch src/serverside/index.js
-
-yarn add express regenerator-runtime
 
 ```javascript
 import 'regenerator-runtime/runtime';
