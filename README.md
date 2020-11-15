@@ -1,10 +1,10 @@
 # Setup
 
-## create project
+## Create project
 
 npm init
 
-## code styling/hygienic setup
+## Code styling/hygienic setup
 
 yarn add -D prettier eslint
 
@@ -53,7 +53,7 @@ touch .prettierrc.json
 }
 ```
 
-## write React code
+## Write React code
 
 yarn add react react-dom
 
@@ -85,13 +85,13 @@ import ReactDom from 'react-dom';
 ReactDom.render(<div>Hello World</div>, document.getElementById('root'));
 ```
 
-## add babel and webpack
+## Add babel and webpack
 
 yarn add -D @babel/core @babel/eslint-parser @babel/preset-env @babel/preset-react
 
 yarn add -D webpack webpack-cli html-webpack-plugin terser-webpack-plugin babel-loader
 
-## transpile React code using webpack and babel
+## Transpile React code using webpack and babel
 
 touch babel.config.json
 
@@ -153,7 +153,7 @@ const reactConfig = {
 module.exports = reactConfig;
 ```
 
-## run React locally
+## Run React locally
 
 yarn add -D webpack-dev-server
 
@@ -169,7 +169,7 @@ add script to package.json
 +   },
 ```
 
-## write node.js and transpile using webpack
+## Write node.js and transpile using webpack
 
 yarn add express regenerator-runtime
 
@@ -259,12 +259,13 @@ export default function App() {
 
 update src/index.js
 
-```javascript
+```diff
 import React from 'react';
 import ReactDom from 'react-dom';
-import App from './App';
++ import App from './App';
 
-ReactDom.render(<App />, document.getElementById('root'));
+- ReactDom.render(<div>Hello World from react</div>, document.getElementById('root'));
++ ReactDom.render(<App />, document.getElementById('root'));
 ```
 
 update src/serverside/index.js
@@ -461,7 +462,7 @@ historyApiFallback: true,
 ...
 }
 
-## serving frontend from node.js
+## Serving frontend from node.js
 
 update src/index.js
 
