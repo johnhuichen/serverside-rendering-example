@@ -11,6 +11,7 @@ npm init
 1. touch .eslintrc.json
 <details>
   <summary>Click to expand!</summary>
+
   ```javascript
   {
     "parser": "@babel/eslint-parser",
