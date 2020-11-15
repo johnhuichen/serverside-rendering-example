@@ -10,41 +10,39 @@ yarn add -D prettier eslint
 
 yarn add -D eslint-config-prettier eslint-plugin-react eslint-config-airbnb eslint-plugin-prettier eslint-plugin-react-hooks eslint-plugin-jsx-a11y eslint-plugin-import
 
-<details>
-  <summary>touch .eslintrc.json</summary>
+touch .eslintrc.json
 
-  ```javascript
-  {
-    "parser": "@babel/eslint-parser",
-    "parserOptions": {
-      "ecmaVersion": 2020,
-      "sourceType": "module",
-      "ecmaFeatures": {
-        "jsx": true
-      }
-    },
-    "extends": ["airbnb", "airbnb/hooks", "plugin:prettier/recommended"],
-    "env": {
-      "es2020": true,
-      "browser": true
-    },
-    "globals": {
-      "Promise": "off"
-    },
-    "rules": {
-      "react/jsx-filename-extension": [1, { "extensions": [".js"] }],
-      "prettier/prettier": "error"
-    },
-    "settings": {
-      "import/resolver": {
-        "node": {
-          "paths": ["src"]
-        }
+```javascript
+{
+  "parser": "@babel/eslint-parser",
+  "parserOptions": {
+    "ecmaVersion": 2020,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
+  "extends": ["airbnb", "airbnb/hooks", "plugin:prettier/recommended"],
+  "env": {
+    "es2020": true,
+    "browser": true
+  },
+  "globals": {
+    "Promise": "off"
+  },
+  "rules": {
+    "react/jsx-filename-extension": [1, { "extensions": [".js"] }],
+    "prettier/prettier": "error"
+  },
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "paths": ["src"]
       }
     }
   }
-  ```
-</details>
+}
+```
 
 touch .prettierrc.json
 
