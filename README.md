@@ -175,9 +175,7 @@ mkdir src/serverside
 
 touch src/serverside/index.js
 
-yarn add express nodemon
-
-yarn add regenerator-runtime
+yarn add express regenerator-runtime
 
 ```javascript
 import 'regenerator-runtime/runtime';
