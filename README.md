@@ -294,7 +294,7 @@ app.listen(8080, () => {
 });
 ```
 
-yarn add Promise
+yarn add promise
 
 touch src/serverside/handleRequestPage.js
 
@@ -349,12 +349,12 @@ export default handleRequestPage;
 
 add a script in package.json
 
-```javascript
+```diff
   ...
   "scripts": {
     "webpack": "webpack",
     "webpack-dev": "webpack serve",
-    "webpack-watch": "webpack watch"
+    + "webpack-watch": "webpack watch"
   },
   ...
 ```
