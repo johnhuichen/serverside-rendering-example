@@ -163,10 +163,10 @@ add script to package.json
 -  "scripts": {
 -     "test": "echo \"Error: no test specified\" && exit 1"
 -   },
--   "scripts": {
--     "webpack": "webpack",
--     "webpack-dev": "webpack serve"
--   },
++   "scripts": {
++     "webpack": "webpack",
++     "webpack-dev": "webpack serve"
++   },
 ```
 
 ## write node.js and transpile using webpack
