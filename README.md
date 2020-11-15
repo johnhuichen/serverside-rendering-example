@@ -270,7 +270,7 @@ import ReactDom from 'react-dom';
 
 update src/serverside/index.js
 
-```javascript
+```diff
 import 'regenerator-runtime/runtime';
 import express from 'express';
 + import handleRequestPage from './handleRequestPage';
@@ -298,7 +298,7 @@ yarn add Promise
 
 touch src/serverside/handleRequestPage.js
 
-```diff
+```javascript
 import React from 'react';
 import ReactDOMServer from 'react-dom/server';
 import fs from 'fs';
