@@ -490,40 +490,52 @@ update webpack.react.js
   ...
 ```
 
+## Try it with npm run start-dev
+
+You will see an error
+
+```
+Error: Invariant failed: Browser history needs a DOM
+```
+
 ## Serving frontend from node.js
 
 update src/index.js
 
-```
+```diff
 import React from "react";
-import { BrowserRouter } from "react-router-dom";
++ import { BrowserRouter } from "react-router-dom";
 import ReactDom from "react-dom";
 import App from "./App";
 
-ReactDom.hydrate(
-  <BrowserRouter>
-    <App />
-  </BrowserRouter>,
-  document.getElementById("root")
-);
+- ReactDom.hydrate(<App />, document.getElementById('root'));
++ ReactDom.hydrate(
++  <BrowserRouter>
++    <App />
++  </BrowserRouter>,
++  document.getElementById("root")
++);
 ```
 
 update src/Router.js
 
-```javascript
+```diff
 import React from "react";
-import { Route, Switch } from "react-router-dom";
+- import { BrowserRouter, Route, Switch } from 'react-router-dom';
++ import { Route, Switch } from "react-router-dom";
 import Route1 from "./Route1";
 import Route2 from "./Route2";
 
 export default function Router() {
   return (
-    <>
+-    <BrowserRouter>
++    <>
       <Switch>
         <Route path="/" exact component={Route1} />
         <Route path="/foo" component={Route2} />
       </Switch>
-    </>
+-    <BrowserRouter>
++    </>
   );
 }
 ```
