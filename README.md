@@ -356,8 +356,8 @@ add scripts in package.json
   "scripts": {
     "webpack": "webpack",
     "webpack-dev": "webpack serve",
-    + "webpack-watch": "webpack -w",
-    + "start-dev": "nodemon build/serverside.js"
++    "webpack-watch": "webpack -w",
++    "start-dev": "nodemon build/serverside.js"
   },
   ...
 ```
