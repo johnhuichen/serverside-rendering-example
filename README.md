@@ -8,9 +8,8 @@ npm init
 
 1. yarn add -D prettier eslint
 1. yarn add -D eslint-config-prettier eslint-plugin-react eslint-config-airbnb eslint-plugin-prettier eslint-plugin-react-hooks eslint-plugin-jsx-a11y eslint-plugin-import
-1. touch .eslintrc.json
 <details>
-  <summary>Click to expand!</summary>
+  <summary>1. touch .eslintrc.json</summary>
 
   ```javascript
   {
